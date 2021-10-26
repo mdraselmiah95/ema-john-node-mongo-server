@@ -42,6 +42,12 @@ async function run() {
 
       res.send({ count, products });
     });
+
+    //Use POST to get data by keys
+    app.post("/products/byKeys", async (req, res) => {
+      console.log(req.body);
+      res.send("hitting post");
+    });
   } finally {
     // await client.close();
   }
