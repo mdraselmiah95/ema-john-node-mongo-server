@@ -26,8 +26,9 @@ async function run() {
       //   console.log(req.query);
       const cursor = productCollection.find({});
       const page = req.query.page;
-      const size = req.query.size;
+      const size = parseInt(req.query.size);
       let products;
+      const count = await cursor.count();
       if (page) {
         products = await cursor
           .skip(page * size)
@@ -38,7 +39,7 @@ async function run() {
       }
 
       //   const products = await cursor.limit(10).toArray();
-      const count = await cursor.count();
+
       res.send({ count, products });
     });
   } finally {
